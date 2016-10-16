@@ -146,7 +146,7 @@
 				TargetAttributes = {
 					B31548CB1DB3629D005A1575 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = MGEJ5BEZZ7;
+						DevelopmentTeam = KPBMY72PJU;
 						ProvisioningStyle = Automatic;
 					};
 					B31548DF1DB3629D005A1575 = {
@@ -341,8 +341,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MGEJ5BEZZ7;
+				DEVELOPMENT_TEAM = KPBMY72PJU;
 				INFOPLIST_FILE = InlineWebview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andore.InlineWebview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -354,8 +355,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = MGEJ5BEZZ7;
+				DEVELOPMENT_TEAM = KPBMY72PJU;
 				INFOPLIST_FILE = InlineWebview/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andore.InlineWebview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,6 +412,7 @@
 				B31548EB1DB3629D005A1575 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B31548EC1DB3629D005A1575 /* Build configuration list for PBXNativeTarget "InlineWebviewUITests" */ = {
 			isa = XCConfigurationList;
@@ -418,6 +421,7 @@
 				B31548EE1DB3629D005A1575 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
