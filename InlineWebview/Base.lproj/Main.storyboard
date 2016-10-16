@@ -16,14 +16,14 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="normal" textLabel="dOh-RP-rMt" style="IBUITableViewCellStyleDefault" id="OJ6-Nd-wBw">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJ6-Nd-wBw" id="p1A-cH-hAg">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dOh-RP-rMt">
-                                            <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -32,30 +32,33 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="web" rowHeight="190" id="t3z-tr-iR1">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="190"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="web" rowHeight="190" id="t3z-tr-iR1" customClass="WebLoadingTableCell" customModule="InlineWebview" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="100" width="375" height="190"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t3z-tr-iR1" id="XhA-I7-G17">
-                                    <frame key="frameInset" width="375" height="189.5"/>
+                                    <frame key="frameInset" width="375" height="189"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sJY-Nu-xHs">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="150" id="wD8-JU-nSr"/>
-                                            </constraints>
+                                        <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sJY-Nu-xHs">
+                                            <color key="progressTintColor" red="0.0" green="0.73748046160000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </progressView>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VXP-nE-ckx">
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VXP-nE-ckx">
                                             <color key="color" red="0.0" green="0.73748046160000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="sJY-Nu-xHs" firstAttribute="centerX" secondItem="XhA-I7-G17" secondAttribute="centerX" id="4nk-jb-lgS"/>
+                                        <constraint firstItem="sJY-Nu-xHs" firstAttribute="top" secondItem="XhA-I7-G17" secondAttribute="top" id="DZ4-ar-efV"/>
                                         <constraint firstItem="VXP-nE-ckx" firstAttribute="centerX" secondItem="XhA-I7-G17" secondAttribute="centerX" id="NfD-2D-dVq"/>
-                                        <constraint firstItem="sJY-Nu-xHs" firstAttribute="centerY" secondItem="XhA-I7-G17" secondAttribute="centerY" id="eQr-zN-0uz"/>
                                         <constraint firstItem="VXP-nE-ckx" firstAttribute="centerY" secondItem="XhA-I7-G17" secondAttribute="centerY" id="q30-Dd-cZ8"/>
+                                        <constraint firstItem="sJY-Nu-xHs" firstAttribute="width" secondItem="XhA-I7-G17" secondAttribute="width" id="xea-g4-YwA"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
+                                <connections>
+                                    <outlet property="activityIndicaor" destination="VXP-nE-ckx" id="eB5-SO-syy"/>
+                                    <outlet property="progressIndicator" destination="sJY-Nu-xHs" id="vy4-aU-C2R"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

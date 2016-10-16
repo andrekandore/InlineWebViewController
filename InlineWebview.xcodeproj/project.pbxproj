@@ -13,6 +13,8 @@
 		B31548D71DB3629D005A1575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B31548D61DB3629D005A1575 /* Assets.xcassets */; };
 		B31548DA1DB3629D005A1575 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B31548D81DB3629D005A1575 /* LaunchScreen.storyboard */; };
 		B31548E51DB3629D005A1575 /* InlineWebviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31548E41DB3629D005A1575 /* InlineWebviewUITests.swift */; };
+		B3B28E141DB3D2F2004F80FC /* WebLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B28E131DB3D2F2004F80FC /* WebLoading.swift */; };
+		B3B28E161DB3D348004F80FC /* WebviewConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B28E151DB3D348004F80FC /* WebviewConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		B31548E01DB3629D005A1575 /* InlineWebviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InlineWebviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31548E41DB3629D005A1575 /* InlineWebviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineWebviewUITests.swift; sourceTree = "<group>"; };
 		B31548E61DB3629D005A1575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3B28E131DB3D2F2004F80FC /* WebLoading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebLoading.swift; sourceTree = "<group>"; };
+		B3B28E151DB3D348004F80FC /* WebviewConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebviewConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 			children = (
 				B31548CF1DB3629D005A1575 /* AppDelegate.swift */,
 				B31548D11DB3629D005A1575 /* ViewController.swift */,
+				B3B28E151DB3D348004F80FC /* WebviewConvenience.swift */,
+				B3B28E131DB3D2F2004F80FC /* WebLoading.swift */,
 				B31548D31DB3629D005A1575 /* Main.storyboard */,
 				B31548D61DB3629D005A1575 /* Assets.xcassets */,
 				B31548D81DB3629D005A1575 /* LaunchScreen.storyboard */,
@@ -201,6 +207,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B28E141DB3D2F2004F80FC /* WebLoading.swift in Sources */,
+				B3B28E161DB3D348004F80FC /* WebviewConvenience.swift in Sources */,
 				B31548D21DB3629D005A1575 /* ViewController.swift in Sources */,
 				B31548D01DB3629D005A1575 /* AppDelegate.swift in Sources */,
 			);

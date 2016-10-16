@@ -11,8 +11,7 @@ import WebKit
 
 let magicSection = 3
 
-
-class ViewController: UITableViewController, WKUIDelegate  {
+class InlineWebViewController: UITableViewController, WKUIDelegate  {
     
     lazy var webView : WKWebView = {
       
@@ -31,8 +30,9 @@ class ViewController: UITableViewController, WKUIDelegate  {
         
         return newWebView
     }()
-    
-    
+}
+
+extension InlineWebViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 5
     }
@@ -66,8 +66,11 @@ class ViewController: UITableViewController, WKUIDelegate  {
             theWebView.frame = frame
             theWebView.autoresizingMask = [.flexibleHeight,.flexibleWidth]
             
-            cell.contentView.addSubview(self.webView)
+            cell.contentView.insertSubview(theWebView, at: 0)
             
+            if let webCell = cell as? WebLoadingTableCell {
+                webCell.webview = theWebView
+            }
         }
         
         return cell
@@ -88,13 +91,16 @@ class ViewController: UITableViewController, WKUIDelegate  {
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+}
 
+extension InlineWebViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         let tableScrollView : UIScrollView = self.tableView
         
         let theWebView = self.webView
         let theWebViewScrollView = theWebView.scrollView
-
+        
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview);
         
         let tableFrame = self.tableView.frame
@@ -104,11 +110,11 @@ class ViewController: UITableViewController, WKUIDelegate  {
         
         let theWebViewScrollViewOffset = theWebViewScrollView.contentOffset
         let theWebViewScrollContentSize = theWebViewScrollView.contentSize
-
+        
         guard theWebViewScrollContentSize.height > tableFrame.height else {
             return
         }
-
+        
         if scrollView.isEqual(theWebViewScrollView) {
             if translation.y > 0 {
                 debugPrint("Direcion Downwards")
@@ -144,7 +150,7 @@ class ViewController: UITableViewController, WKUIDelegate  {
                 
             } else {
                 debugPrint("Direcion Downwards")
-
+                
                 if currentTableOffset.y >=  theMagicRect.origin.y, theWebViewScrollViewOffset.y <= 0 {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = true
                     tableScrollView.isScrollEnabled = false
@@ -156,13 +162,13 @@ class ViewController: UITableViewController, WKUIDelegate  {
     
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-
+        
         let tableFrame = self.tableView.frame
-
+        
         let theWebView = self.webView
         let theWebViewScrollView = theWebView.scrollView
         let theWebViewScrollContentSize = theWebViewScrollView.contentSize
-
+        
         guard theWebViewScrollContentSize.height > tableFrame.height else {
             return
         }
@@ -189,14 +195,14 @@ class ViewController: UITableViewController, WKUIDelegate  {
         } else {
             if translation.y > 0 {
                 debugPrint("Direcion Upwards")
-
+                
                 if currentTargetContentOffset.y <= theMagicRect.origin.y, currentTableOffset.y > theMagicRect.origin.y {
                     targetContentOffset.pointee.y = theMagicRect.origin.y
                 }
                 
             } else {
                 debugPrint("Direcion Downwards")
-
+                
                 let webviewOffset = theWebView.scrollView.contentOffset
                 let webviewBounds = theWebView.scrollView.contentSize
                 if  currentTargetContentOffset.y+theMagicRect.size.height >= webviewBounds.height {
@@ -207,35 +213,8 @@ class ViewController: UITableViewController, WKUIDelegate  {
                     newContentOffset.y += (currentTargetContentOffset.y - webviewOffset.y)
                     theWebViewScrollView.setContentOffset(newContentOffset, animated: true)
                 }
-
             }
         }
     }
 }
 
-
-extension WKWebView {
-     @IBInspectable var urlString : String? {
-        set {
-            guard let aNewValue = newValue else {
-                return
-            }
-            
-            guard let newURL = URL(string: aNewValue) else {
-                return
-            }
-            
-            let request = URLRequest(url: newURL)
-            self.load(request)
-        }
-        get {
-            return self.url?.absoluteString
-        }
-    }
-}
-
-
-class WebLoadingTableCell: UITableViewCell {
-    @IBOutlet var progressIndicator : UIProgressView?
-    @IBOutlet var activityIndicaor : UIActivityIndicatorView?
-}
