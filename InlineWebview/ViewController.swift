@@ -120,6 +120,7 @@ class ViewController: UITableViewController, WKUIDelegate  {
                 }
                 
             } else {
+                debugPrint("Direcion Downwards")
                 
                 if theWebViewScrollViewOffset.y + tableFrame.height + 1 >= theWebViewScrollContentSize.height {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = false
@@ -142,7 +143,8 @@ class ViewController: UITableViewController, WKUIDelegate  {
                 }
                 
             } else {
-                
+                debugPrint("Direcion Downwards")
+
                 if currentTableOffset.y >=  theMagicRect.origin.y, theWebViewScrollViewOffset.y <= 0 {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = true
                     tableScrollView.isScrollEnabled = false
@@ -153,67 +155,62 @@ class ViewController: UITableViewController, WKUIDelegate  {
     }
     
     
-//    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        
-//        let currentOffset = scrollView.contentOffset
-//        let currentTargetContentOffset = targetContentOffset.pointee
-//        let theMagicIndexPath = IndexPath(row: 0, section: magicSection)
-//        let theMagicRect = self.tableView.rectForRow(at: theMagicIndexPath)
-//
-//        let theWebView = self.webView
-//
-//        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview);
-//        if translation.y > 0 {
-//            debugPrint("Direcion Upwards")
-//            
-//            if scrollView.isEqual(theWebView.scrollView) {
-//                if currentTargetContentOffset.y <= 0 {
-////                  targetContentOffset.pointee.y = theMagicPosition.origin.y
-//                    theWebView.isUserInteractionEnabled = false
-//                    self.tableView.isScrollEnabled = true
-//                }
-//            } else {
-//                
-//                if currentTargetContentOffset.y <= theMagicRect.origin.y, currentOffset.y > theMagicRect.origin.y {
-//                    targetContentOffset.pointee.y = theMagicRect.origin.y
-//                    theWebView.isUserInteractionEnabled = true
-//                    self.tableView.isScrollEnabled = false
-//                }
-//
-//            }
-//
-//        } else {
-//            debugPrint("Direcion Downwards")
-//            
-//            if scrollView.isEqual(theWebView.scrollView) {
-//                
-//                let webviewOffset = theWebView.scrollView.contentOffset
-//                let webviewBounds = theWebView.scrollView.contentSize
-//                if  currentTargetContentOffset.y+theMagicRect.size.height >= webviewBounds.height {
-//                    theWebView.isUserInteractionEnabled = false
-//                    self.tableView.isScrollEnabled = true
-//                    self.webView.scrollView.setContentOffset(currentTargetContentOffset, animated: true)
-//                    var newContentOffset = self.tableView.contentOffset
-//                    newContentOffset.y += (currentTargetContentOffset.y - webviewOffset.y)
-//                    self.tableView.setContentOffset(newContentOffset, animated: true)
-//                }
-//                
-//                
-//                
-//            } else {
-////                let maxOffsetPoint = CGPoint(x: currentTargetContentOffset.x, y: currentTargetContentOffset.y+theMagicRect.size.height)
-//                
-//                if currentTargetContentOffset.y >= theMagicRect.origin.y, currentOffset.y < theMagicRect.origin.y {
-//                    targetContentOffset.pointee.y = theMagicRect.origin.y
-//                    theWebView.isUserInteractionEnabled = true
-//                    self.tableView.isScrollEnabled = false
-//                }
-//            }
-//        }
-//        
-//    }
-    
-    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+        let tableFrame = self.tableView.frame
+
+        let theWebView = self.webView
+        let theWebViewScrollView = theWebView.scrollView
+        let theWebViewScrollContentSize = theWebViewScrollView.contentSize
+
+        guard theWebViewScrollContentSize.height > tableFrame.height else {
+            return
+        }
+        
+        let currentTargetContentOffset = targetContentOffset.pointee
+        let tableScrollView : UIScrollView = self.tableView
+        
+        let currentTableOffset = tableScrollView.contentOffset
+        let theMagicIndexPath = IndexPath(row: 0, section: magicSection)
+        let theMagicRect = self.tableView.rectForRow(at: theMagicIndexPath)
+        
+        let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview);
+        
+        if scrollView.isEqual(theWebViewScrollView) {
+            if translation.y > 0 {
+                debugPrint("Direcion Upwards")
+            } else {
+                debugPrint("Direcion Downwards")
+                
+                if currentTargetContentOffset.y >= theMagicRect.origin.y, currentTableOffset.y < theMagicRect.origin.y {
+                    targetContentOffset.pointee.y = theMagicRect.origin.y
+                }
+            }
+        } else {
+            if translation.y > 0 {
+                debugPrint("Direcion Upwards")
+
+                if currentTargetContentOffset.y <= theMagicRect.origin.y, currentTableOffset.y > theMagicRect.origin.y {
+                    targetContentOffset.pointee.y = theMagicRect.origin.y
+                }
+                
+            } else {
+                debugPrint("Direcion Downwards")
+
+                let webviewOffset = theWebView.scrollView.contentOffset
+                let webviewBounds = theWebView.scrollView.contentSize
+                if  currentTargetContentOffset.y+theMagicRect.size.height >= webviewBounds.height {
+                    
+                    theWebViewScrollView.setContentOffset(currentTargetContentOffset, animated: true)
+                    
+                    var newContentOffset = self.tableView.contentOffset
+                    newContentOffset.y += (currentTargetContentOffset.y - webviewOffset.y)
+                    theWebViewScrollView.setContentOffset(newContentOffset, animated: true)
+                }
+
+            }
+        }
+    }
 }
 
 
