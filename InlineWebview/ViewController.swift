@@ -111,7 +111,7 @@ class ViewController: UITableViewController, WKUIDelegate  {
 
         if scrollView.isEqual(theWebViewScrollView) {
             if translation.y > 0 {
-                debugPrint("Direcion Upwards")
+                debugPrint("Direcion Downwards")
                 
                 if currentTableOffset.y >=  theMagicRect.origin.y, theWebViewScrollViewOffset.y <= 0 {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = false
@@ -120,11 +120,12 @@ class ViewController: UITableViewController, WKUIDelegate  {
                 }
                 
             } else {
-                debugPrint("Direcion Downwards")
                 
-                if theWebViewScrollViewOffset.y + tableFrame.height+1 >= theWebViewScrollContentSize.height {
+                if theWebViewScrollViewOffset.y + tableFrame.height + 1 >= theWebViewScrollContentSize.height {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = false
                     tableScrollView.isScrollEnabled = true
+                } else if false == tableScrollView.isScrollEnabled {
+                    tableScrollView.contentOffset = theMagicRect.origin
                 }
             }
         } else {
@@ -136,10 +137,11 @@ class ViewController: UITableViewController, WKUIDelegate  {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = true
                     tableScrollView.isScrollEnabled = false
                     tableScrollView.contentOffset = theMagicRect.origin
+                } else if false == tableScrollView.isScrollEnabled {
+                    tableScrollView.contentOffset = theMagicRect.origin
                 }
                 
             } else {
-                debugPrint("Direcion Downwards")
                 
                 if currentTableOffset.y >=  theMagicRect.origin.y, theWebViewScrollViewOffset.y <= 0 {
                     theWebViewScrollView.panGestureRecognizer.isEnabled = true
