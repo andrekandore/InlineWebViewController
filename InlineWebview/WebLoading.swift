@@ -41,17 +41,29 @@ class WebLoadingTableCell: UITableViewCell {
         }
         
         if let theActivityIndicator = self.activityIndicaor {
-            if true == theWebview.isLoading {
-                theActivityIndicator.startAnimating()
-            } else {
-                theActivityIndicator.stopAnimating()
-            }
+            UIView.animate(withDuration: 0.55, animations: {
+                if true == theWebview.isLoading {
+                    theActivityIndicator.startAnimating()
+                } else {
+                    theActivityIndicator.stopAnimating()
+                }
+            })
         }
         
         if let theProgressIndicator = self.progressIndicator {
             let theProgress = Float(theWebview.estimatedProgress)
-            theProgressIndicator.progress = theProgress
-            theProgressIndicator.isHidden = (theProgress >= 1.0)
+            let animationTime = TimeInterval(theProgress)
+            
+            UIView.animate(withDuration: animationTime, animations: {
+                theProgressIndicator.setProgress(theProgress, animated: true)
+                if theProgress >= 1.0 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + animationTime, execute: {
+                        theProgressIndicator.isHidden = true
+                    })
+                } else {
+                    theProgressIndicator.isHidden = false
+                }
+            })
         }
     }
 }
